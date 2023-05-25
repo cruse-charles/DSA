@@ -12,8 +12,19 @@
 // anagrams('listen', 'silent') => true
 // anagrams('listen', 'potato') => false
 
+const anagrams = (str1, str2) => {
+    const hash1 = {}
+    const hash2 = {}
 
+    str1.split("").forEach((letter) => {
+        if(!hash1[letter]) hash1[letter] = 0;
+        hash1[letter] += 1
+    })
 
+    console.log(hash1)
+}
+
+anagrams('listen', 'silent')
 
 
 // Write a `String.prototype.symmetricSubstrings` method that returns an array
