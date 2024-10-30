@@ -6,11 +6,14 @@
 // Return the merged string.
 
 var mergeAlternately = function(word1, word2) {
+    // Calculate the maximum length between word1 and word2
     const maxLength = Math.max(word1.length, word2.length)
     let result = ''
     
-    // iterate i, adding in word 1 then word 2
+    // Calculate the maximum length between word1 and word2
     for (let i = 0; i < maxLength; i++) {
+        // Check if there is a character in word1/2 at index i
+        // If true, add that character to the result string
         if (i < word1.length) result += word1[i]
         if (i < word2.length) result += word2[i]
     }
