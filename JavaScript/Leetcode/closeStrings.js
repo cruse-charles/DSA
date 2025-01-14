@@ -44,8 +44,8 @@ var closeStrings = function(word1, word2) {
     // Example: { 'c', 'a', 'b' }
     const w1Chars = new Set(Object.keys(w1Hash)); 
     const w2Chars = new Set(Object.keys(w2Hash));
-    if (w1Chars.size !== w2Chars.size || [...w1Chars].some(char => !w2Chars.has(char))) {
-        return false;
+    if (![...w1Chars].every((char) => w2Chars.has(char))) {
+        return false
     }
 
     // Extract frequency values for both words
