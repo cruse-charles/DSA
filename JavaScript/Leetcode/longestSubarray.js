@@ -17,37 +17,34 @@
 
 
 var longestSubarray = function(nums) {
-    // Initialize pointers for the sliding window
-    let l = 0; // Left boundary of the window
-    let r = 0; // Right boundary of the window
-    let hasDeleted = false; // Tracks if a 0 has been deleted
-    let maxSubarrayLength = 0; // Maximum length of the subarray of 1s
+    let maxLength = 0; // Initialize the maximum length of the subarray of 1s
+    let l = 0; // Left pointer for the sliding window
+    let hasZero = false; // Flag to track if a zero has been encountered
 
-    // Traverse the array with the right pointer
-    while (r < nums.length) {
-        // If the current element is 0 and we haven't deleted any 0s yet, mark it as deleted
-        if (nums[r] === 0) {
-            if (!hasDeleted) {
-                // Mark the current 0 as deleted
-                hasDeleted = true;
-            } else {
-                // If a 0 has already been deleted, shrink the window from the left
-                while (nums[l] !== 0) {
-                    // Move the left pointer past all 1s
-                    l++;
+    // Iterate through nums with the right pointer (r)
+    for (let r = 0; r < nums.length; r++) {
+        // If the current element is 0 and we have already encountered a zero
+        if (nums[r] === 0 && hasZero) {
+            // Move the left pointer to the right until we pass the first zero
+            while (hasZero) {
+                // If the element at the left pointer is 0, set hasZero to false
+                if (nums[l] === 0) {
+                    hasZero = false;
                 }
-                // Skip the 0 to maintain a single deletion
+                // Move the left pointer to the right
                 l++;
             }
         }
+        
+        // If the current element is 0, set the hasZero flag to true
+        if (nums[r] === 0) {
+            hasZero = true;
+        }
 
-        // Update the maximum subarray length (excluding the 0 we delete)
-        maxSubarrayLength = Math.max(maxSubarrayLength, r - l);
-
-        // Expand the window by moving the right pointer
-        r++;
+        // Update the maximum length of the subarray of 1s
+        maxLength = Math.max(maxLength, r - l);
     }
 
-    // Return the maximum subarray length
-    return maxSubarrayLength;
+    // Return the maximum length of the subarray of 1s
+    return maxLength;
 };
